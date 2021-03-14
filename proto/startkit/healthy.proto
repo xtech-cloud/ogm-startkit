@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package xtc.ogm.startkit;
+
+service Healthy{
+  rpc Echo(Request) returns (Response) {}
+  rpc PingPong(stream Ping) returns (stream Pong) {}
+}
+
+message Request { string msg = 1; }
+
+message Response { string msg = 1; }
+
+message Ping { int64 stroke = 1; }
+
+message Pong { int64 stroke = 1; }
