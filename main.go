@@ -10,8 +10,8 @@ import (
 	"path/filepath"
 	"time"
 
-	"github.com/micro/go-micro/v2"
-	"github.com/micro/go-micro/v2/logger"
+	"github.com/asim/go-micro/v3"
+	"github.com/asim/go-micro/v3/logger"
 
 	proto "ogm-startkit/proto/startkit"
 )

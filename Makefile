@@ -2,6 +2,7 @@ APP_NAME := ogm-startkit
 BUILD_VERSION   := $(shell git tag --contains)
 BUILD_TIME      := $(shell date "+%F %T")
 COMMIT_SHA1     := $(shell git rev-parse HEAD )
+GOOGLEAPIS_DIR  := /usr/local/include/googleapis
 
 .PHONY: build
 build: proto
@@ -15,7 +16,8 @@ build: proto
 
 .PHONY: proto
 proto:
-	protoc --proto_path=. --micro_out=. --go_out=. proto/startkit/healthy.proto
+	protoc -I/usr/local/include/googleapis --proto_path=. --micro_out=. --go_out=. proto/startkit/healthy.proto
+	#protoc -I/usr/local/include/googleapis -I./proto --include_imports --include_source_info --descriptor_set_out=./proto/startkit.pb proto/startkit/healthy.proto
 	#/mnt/c/_wsl/protoc.exe --proto_path=./ --csharp_out=./proto/startkit --grpc_out=./proto/startkit --plugin=protoc-gen-grpc=c:/_wsl/grpc_csharp_plugin.exe proto/startkit/echo.proto
 	#/mnt/c/_wsl/protoc.exe -I=./proto --js_out=import_style=typescript:./proto/startkit --grpc-web_out=import_style=typescript,mode=grpcwebtext:./proto proto/startkit/echo.proto
 	#protoc --proto_path=./ --java_out=./proto/startkit proto/startkit/echo.proto
@@ -37,7 +39,7 @@ run-cs:
 
 .PHONY: call
 call:
-	MICRO_REGISTRY=consul micro call xtc.api.ogm.startkit Healthy.Echo '{"msg":"hello"}'
+	MICRO_REGISTRY=etcd micro call xtc.api.ogm.startkit Healthy.Echo '{"msg":"hello"}'
 
 .PHONY: post
 post:

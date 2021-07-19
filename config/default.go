@@ -1,7 +1,7 @@
 package config
 
 const defaultYAML string = `
-service:
+service: 
     name: xtc.api.ogm.startkit
     address: :19999
     ttl: 15

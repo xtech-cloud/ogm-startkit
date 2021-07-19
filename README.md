@@ -48,7 +48,8 @@ http://mirrors.aliyun.com/alpine/v3.12/community/
 - 安装Protobuf
 
     ```bash
-    ~# apk add --no-cache protoc 
+    ~# apk add --no-cache protobuf 
+    ~# apk add --no-cache protobuf-dev
     ```
 
 - 安装protoc-gen-go
@@ -89,6 +90,12 @@ http://mirrors.aliyun.com/alpine/v3.12/community/
     ~# apk add --no-cache consul --repository=http://mirrors.aliyun.com/alpine/edge/community/
     ```
 
+- 安装Etcd
+
+    ```bash
+    ~# apk add --no-cache etcd --repository=http://mirrors.aliyun.com/alpine/edge/testing/
+    ```
+
 
 ## 编译
 使用以下命令编译二进制文件
@@ -98,7 +105,14 @@ http://mirrors.aliyun.com/alpine/v3.12/community/
 
 ## 测试
 
-启动consul
+启动etcd
+
+```
+~# cd ~
+~# etcd &
+```
+
+如果etcd启动失败，可以尝试使用consul
 
 ```
 ~# consul agent -dev &
@@ -107,7 +121,7 @@ http://mirrors.aliyun.com/alpine/v3.12/community/
 启动网关
 
 ```
-~# MICRO_REGISTRY=consul micro api --namespace=xtc.api --address=:18800
+~# MICRO_REGISTRY=etcd micro api --namespace=xtc.api --address=:18800
 ```
 
 测试RPC

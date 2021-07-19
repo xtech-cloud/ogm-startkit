@@ -10,7 +10,7 @@ from threading import Thread, Lock
 BEGIN
 '''
 
-domain = 'http://localhost:8080'
+domain = 'http://localhost:18800'
 
 urls = [
         domain+'/ogm/startkit/Healthy/Echo',
