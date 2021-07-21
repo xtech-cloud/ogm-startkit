@@ -10,11 +10,11 @@ service Healthy
     rpc Echo(Request) returns (Response)
     {
         option (google.api.http) = {
-            post: "/xtc/ogm/startkit/healthy/echo"
-            body: "*"
+            post : "/xtc/ogm/startkit/healthy/echo"
+            body : "*"
         };
     }
-    rpc PingPong(stream Ping) returns (stream Pong) {}
+    rpc PingPong(stream Ping) returns (stream Pong) { }
 }
 
 message Request { string msg = 1; }
