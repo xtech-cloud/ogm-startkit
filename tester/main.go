@@ -9,17 +9,18 @@ import (
 
 	proto "ogm-startkit/proto/startkit"
 
-	"github.com/micro/go-micro/v2"
-	"github.com/micro/go-micro/v2/client"
-	"github.com/micro/go-micro/v2/logger"
-	_ "github.com/micro/go-plugins/registry/consul/v2"
-	_ "github.com/micro/go-plugins/registry/etcdv3/v2"
+	_ "github.com/asim/go-micro/plugins/registry/etcd/v3"
+	"github.com/asim/go-micro/plugins/client/grpc/v3"
+	"github.com/asim/go-micro/v3"
+	"github.com/asim/go-micro/v3/client"
+	"github.com/asim/go-micro/v3/logger"
 )
 
 func main() {
 	config.Setup()
 	service := micro.NewService(
-		micro.Name(config.Schema.Service.Name + ".tester"),
+		micro.Client(grpc.NewClient()),
+		micro.Name(config.Schema.Service.Name+".tester"),
 	)
 	service.Init()
 
