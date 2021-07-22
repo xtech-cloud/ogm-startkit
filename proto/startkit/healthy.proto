@@ -3,17 +3,9 @@ syntax = "proto3";
 //package xtc.ogm.startkit;
 option go_package = "proto/startkit;startkit";
 
-import "google/api/annotations.proto";
-
 service Healthy
 {
-    rpc Echo(Request) returns (Response)
-    {
-        option (google.api.http) = {
-            post : "/xtc/ogm/startkit/healthy/echo"
-            body : "*"
-        };
-    }
+    rpc Echo(Request) returns (Response) { }
     rpc PingPong(stream Ping) returns (stream Pong) { }
 }
 

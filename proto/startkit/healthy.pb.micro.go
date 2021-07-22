@@ -5,7 +5,6 @@ package startkit
 
 import (
 	fmt "fmt"
-	_ "google.golang.org/genproto/googleapis/api/annotations"
 	proto "google.golang.org/protobuf/proto"
 	math "math"
 )
@@ -31,15 +30,7 @@ var _ server.Option
 // Api Endpoints for Healthy service
 
 func NewHealthyEndpoints() []*api.Endpoint {
-	return []*api.Endpoint{
-		{
-			Name:    "Healthy.Echo",
-			Path:    []string{"/xtc/ogm/startkit/healthy/echo"},
-			Method:  []string{"POST"},
-			Body:    "*",
-			Handler: "rpc",
-		},
-	}
+	return []*api.Endpoint{}
 }
 
 // Client API for Healthy service
@@ -138,13 +129,6 @@ func RegisterHealthyHandler(s server.Server, hdlr HealthyHandler, opts ...server
 		healthy
 	}
 	h := &healthyHandler{hdlr}
-	opts = append(opts, api.WithEndpoint(&api.Endpoint{
-		Name:    "Healthy.Echo",
-		Path:    []string{"/xtc/ogm/startkit/healthy/echo"},
-		Method:  []string{"POST"},
-		Body:    "*",
-		Handler: "rpc",
-	}))
 	return s.Handle(s.NewHandler(&Healthy{h}, opts...))
 }
 

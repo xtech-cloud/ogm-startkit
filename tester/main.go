@@ -5,22 +5,19 @@ import (
 	"io"
 	"time"
 
-	"ogm-startkit/config"
-
 	proto "ogm-startkit/proto/startkit"
 
-	_ "github.com/asim/go-micro/plugins/registry/etcd/v3"
 	"github.com/asim/go-micro/plugins/client/grpc/v3"
+	_ "github.com/asim/go-micro/plugins/registry/etcd/v3"
 	"github.com/asim/go-micro/v3"
 	"github.com/asim/go-micro/v3/client"
 	"github.com/asim/go-micro/v3/logger"
 )
 
 func main() {
-	config.Setup()
 	service := micro.NewService(
 		micro.Client(grpc.NewClient()),
-		micro.Name(config.Schema.Service.Name+".tester"),
+		micro.Name("tester"),
 	)
 	service.Init()
 
@@ -37,20 +34,22 @@ func main() {
 		}),
 	)
 
-	healthy := proto.NewHealthyService(config.Schema.Service.Name, cli)
+	healthy := proto.NewHealthyService("xtc.ogm.startkit", cli)
 
 	logger.Trace("----------------------------------------------------------")
 	// Call
 	{
 		rsp, err := healthy.Echo(context.Background(), &proto.Request{
-			Msg: time.Now().String() + " | OGM-StartKit",
+			Msg: time.Now().String() + " | hello",
 		})
 		if err != nil {
 			logger.Error(err)
+            return
 		} else {
 			logger.Info(rsp.Msg)
 		}
 	}
+
 
 	stream, err := healthy.PingPong(context.Background())
 	if err != nil {
