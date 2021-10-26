@@ -39,7 +39,7 @@ run-cs:
 
 .PHONY: call
 call:
-	MICRO_REGISTRY=etcd micro call xtc.api.ogm.startkit Healthy.Echo '{"msg":"hello"}'
+	MICRO_REGISTRY=etcd gomu call xtc.ogm.startkit Healthy.Echo '{"msg":"hello"}'
 
 .PHONY: post
 post:

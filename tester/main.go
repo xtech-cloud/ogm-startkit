@@ -5,13 +5,12 @@ import (
 	"io"
 	"time"
 
-	proto "ogm-startkit/proto/startkit"
-
 	"github.com/asim/go-micro/plugins/client/grpc/v3"
 	_ "github.com/asim/go-micro/plugins/registry/etcd/v3"
 	"github.com/asim/go-micro/v3"
 	"github.com/asim/go-micro/v3/client"
 	"github.com/asim/go-micro/v3/logger"
+	proto "ogm-startkit/proto/startkit"
 )
 
 func main() {
@@ -44,12 +43,11 @@ func main() {
 		})
 		if err != nil {
 			logger.Error(err)
-            return
+			return
 		} else {
 			logger.Info(rsp.Msg)
 		}
 	}
-
 
 	stream, err := healthy.PingPong(context.Background())
 	if err != nil {
