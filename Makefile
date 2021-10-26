@@ -29,17 +29,17 @@ proto:
 run:
 	./bin/${APP_NAME}
 
-.PHONY: run-fs
+.PHONY: run-f
 run-fs:
 	MSA_CONFIG_DEFINE='{"source":"file","prefix":"/etc/ogm/","key":"startkit.yml"}' ./bin/${APP_NAME}
 
-.PHONY: run-cs
+.PHONY: run-e
 run-cs:
-	MSA_CONFIG_DEFINE='{"source":"consul","prefix":"/xtc/ogm/config","key":"startkit.yml"}' ./bin/${APP_NAME}
+	MSA_CONFIG_DEFINE='{"source":"etcd","prefix":"/xtc/ogm/config","key":"startkit.yml"}' ./bin/${APP_NAME}
 
 .PHONY: call
 call:
-	MICRO_REGISTRY=etcd gomu call xtc.ogm.startkit Healthy.Echo '{"msg":"hello"}'
+	gomu --registry=etcd --client=grpc call xtc.ogm.startkit Healthy.Echo '{"msg":"hello"}'
 
 .PHONY: post
 post:

@@ -81,6 +81,7 @@ http://mirrors.aliyun.com/alpine/v3.14/community/
     将以下两行代码加入到cmd/gomu/main.go中
     ```go
     _ "github.com/asim/go-micro/plugins/registry/etcd/v3" 
+    _ "github.com/asim/go-micro/plugins/server/grpc/v3"
     ```
 
     ```
