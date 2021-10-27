@@ -58,3 +58,7 @@ dist:
 	rm -rf ./dist
 	mkdir ./dist
 	tar -zcf dist/${APP_NAME}-${BUILD_VERSION}.tar.gz ./bin/${APP_NAME}
+
+.PHONY: docker
+docker:
+	docker build -t ${APP_NAME}:${BUILD_VERSION} .
