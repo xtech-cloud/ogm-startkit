@@ -61,4 +61,7 @@ dist:
 
 .PHONY: docker
 docker:
-	docker build -t ${APP_NAME}:${BUILD_VERSION} .
+	docker build -t xtechcloud/${APP_NAME}:${BUILD_VERSION} .
+	docker rm -f ${APP_NAME}
+	docker run --restart=always --name=${APP_NAME} --net=host -v /data/${APP_NAME}:/ogm -e MSA_REGISTRY_ADDRESS='localhost:2379' -e MSA_CONFIG_DEFINE='{"source":"file","prefix":"/ogm/config","key":"${APP_NAME}.yaml"}' -d xtechcloud/${APP_NAME}:${BUILD_VERSION}
+	docker logs -f ${APP_NAME}

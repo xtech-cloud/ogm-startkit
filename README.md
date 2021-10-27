@@ -103,7 +103,11 @@ http://mirrors.aliyun.com/alpine/v3.14/community/
 
 ```
 ~# cd ~
-~# etcd &
+~# etcd 
+```
+启动服务
+```
+~# ./bin/ogm-startkit
 ```
 
 测试RPC
@@ -111,27 +115,10 @@ http://mirrors.aliyun.com/alpine/v3.14/community/
 ~# make call
 ```
 
-测试HTTP
-```shell
-~# make post
-```
-
-测试客户端模拟
-```bash
-~# make tester
-~# ./bin/tester
-```
-
-测试性能
-```bash
-~# make benchmark
-```
-
 打包(git打上tag后，生成的包会自动加上tag)
 ```bash
 ~# make dist
 ```
-
 
 ## 配置
 
@@ -159,3 +146,47 @@ http://mirrors.aliyun.com/alpine/v3.14/community/
         "key": "startkit.yaml"
     }	
     ```
+
+# Docker镜像
+
+## Windows
+
+### Debian
+安装Debian10的wsl2版本
+安装docker-ce
+拉取ogm-deploy库
+安装dev版本
+
+### Ubuntu
+安装Ubuntu20.04的wsl2版本
+安装docker-ce
+拉取ogm-deploy库
+
+使用以下命令创建docker镜像
+```
+~# make docker
+```
+
+### Alpine
+使用以下命令测试
+```
+~# make call
+```
+
+# 测试
+
+测试HTTP
+```shell
+~# make post
+```
+
+测试客户端模拟
+```bash
+~# make tester
+~# ./bin/tester
+```
+
+测试性能
+```bash
+~# make benchmark
+```
