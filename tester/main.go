@@ -1,3 +1,4 @@
+/*
 package main
 
 import (
@@ -70,3 +71,4 @@ func main() {
 		logger.Infof("Pong %v", rsp.Stroke)
 	}
 }
+*/

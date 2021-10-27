@@ -93,6 +93,7 @@ http://mirrors.aliyun.com/alpine/v3.14/community/
 ## 编译
 使用以下命令编译二进制文件
 ```shell
+~# go mod tidy
 ~# make
 ```
 
