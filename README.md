@@ -10,8 +10,6 @@ OGM开发套件
 - [配置](#配置)
 
 
-
-
 ## 环境设置
 
 ### Alpine
@@ -120,6 +118,7 @@ http://mirrors.aliyun.com/alpine/v3.14/community/
 ~# make dist
 ```
 
+
 ## 配置
 
 - MSA_REGISTRY_PLUGIN
@@ -147,9 +146,9 @@ http://mirrors.aliyun.com/alpine/v3.14/community/
     }	
     ```
 
-# Docker镜像
+# 测试环境部署
 
-## Windows
+## Windows环境
 
 ### Debian
 安装Debian10的wsl2版本
@@ -173,20 +172,42 @@ http://mirrors.aliyun.com/alpine/v3.14/community/
 ~# make call
 ```
 
-# 测试
+## HTTP转换
 
-测试HTTP
+### 配置APISIX
+
+首先确定apisix和apisix-dashboard两个容器已经正常运行。
+
+```
+~# python3 apisix/push_to_gateway.py
+```
+
+按如下填写
+```
+apisix_address:localhost
+proto_id:19999
+proto_package:startkit
+proto_dir:proto/startkit
+```
+
+proto_id建议为微服务的默认端口
+
+网页浏览器打开localhost,在路由菜单中的高级特性中导入OpenAPI，选择apisix/api.json文件
+
+### 在sandbox中进行测试
+
+拷贝bin/ogm-starkit到Debian的/data/ogm/ogm-sandbox/bin
+修改Debian的/data/ogm/ogm-sandbox/startup.sh
+```
+/ogm/bin/ogm-startkit &
+```
+
+重启容器
+```
+~# docker restart ogm_ogm-sandbox_1
+```
+
+在alpine中测试http
 ```shell
 ~# make post
-```
-
-测试客户端模拟
-```bash
-~# make tester
-~# ./bin/tester
-```
-
-测试性能
-```bash
-~# make benchmark
 ```

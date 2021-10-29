@@ -11,7 +11,7 @@ MAINTAINER XTech Cloud "xtech.cloud"
 ENV container docker
 ENV MSA_MODE release
 
-EXPOSE 19999
+EXPOSE 18899
 
 ADD bin/ogm-startkit /usr/local/bin/
 RUN chmod +x /usr/local/bin/ogm-startkit

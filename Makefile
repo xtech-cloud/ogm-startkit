@@ -43,7 +43,7 @@ call:
 
 .PHONY: post
 post:
-	curl -X POST -d '{"msg":"hello"}' 127.0.0.1:18800/ogm/startkit/Healthy/Echo
+	curl -X POST -H 'Content-Type:application/json' -d '{"msg":"hello"}' 127.0.0.1/startkit/Healthy/Echo
 
 .PHONY: tester
 tester:
@@ -63,5 +63,5 @@ dist:
 docker:
 	docker build -t xtechcloud/${APP_NAME}:${BUILD_VERSION} .
 	docker rm -f ${APP_NAME}
-	docker run --restart=always --name=${APP_NAME} --net=host -v /data/${APP_NAME}:/ogm -e MSA_REGISTRY_ADDRESS='localhost:2379' -e MSA_CONFIG_DEFINE='{"source":"file","prefix":"/ogm/config","key":"${APP_NAME}.yaml"}' -d xtechcloud/${APP_NAME}:${BUILD_VERSION}
+	docker run --restart=always --name=${APP_NAME} --net=host -e MSA_REGISTRY_ADDRESS='localhost:2379' -d xtechcloud/${APP_NAME}:${BUILD_VERSION}
 	docker logs -f ${APP_NAME}
